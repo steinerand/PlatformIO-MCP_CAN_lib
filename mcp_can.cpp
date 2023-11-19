@@ -1282,6 +1282,24 @@ INT8U MCP_CAN::getError(void)
 }
 
 /*********************************************************************************************************
+** Function name:           clearErrorRX1OVR
+** Descriptions:            Receive Buffer 0 Overflow Flag bit.
+*********************************************************************************************************/
+void MCP_CAN::clearErrorRX0OVR(void)
+{
+    return mcp2515_modifyRegister(MCP_EFLG, 0b01000000, 0);
+}
+
+/*********************************************************************************************************
+** Function name:           clearErrorRX1OVR
+** Descriptions:            Receive Buffer 1 Overflow Flag bit.
+*********************************************************************************************************/
+void MCP_CAN::clearErrorRX1OVR(void)
+{
+    return mcp2515_modifyRegister(MCP_EFLG, 0b10000000, 0);
+}
+
+/*********************************************************************************************************
 ** Function name:           mcp2515_errorCountRX
 ** Descriptions:            Returns REC register value
 *********************************************************************************************************/
