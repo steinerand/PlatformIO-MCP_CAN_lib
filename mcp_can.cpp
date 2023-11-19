@@ -231,8 +231,7 @@ INT8U MCP_CAN::mcp2515_requestNewMode(const INT8U newmode)
 *********************************************************************************************************/
 INT8U MCP_CAN::mcp2515_configRate(const INT8U canSpeed, const INT8U canClock)            
 {
-    INT8U set, cfg1, cfg2, cfg3;
-    set = 1;
+    INT8U cfg1 = 0, cfg2 = 0, cfg3 = 0;
     switch (canClock & MCP_CLOCK_SELECT)
     {
         case (MCP_8MHZ):
@@ -323,8 +322,7 @@ INT8U MCP_CAN::mcp2515_configRate(const INT8U canSpeed, const INT8U canClock)
             break;  
 
             default:
-            set = 0;
-	    return MCP2515_FAIL;
+	        return MCP2515_FAIL;
             break;
         }
         break;
@@ -411,8 +409,7 @@ INT8U MCP_CAN::mcp2515_configRate(const INT8U canSpeed, const INT8U canClock)
             break;  
 
             default:
-            set = 0;
-	    return MCP2515_FAIL;
+	        return MCP2515_FAIL;
             break;
         }
         break;
@@ -475,15 +472,13 @@ INT8U MCP_CAN::mcp2515_configRate(const INT8U canSpeed, const INT8U canClock)
             break;  
 
             default:
-            set = 0;
             return MCP2515_FAIL;
             break;
         }
         break;
         
         default:
-        set = 0;
-	return MCP2515_FAIL;
+	    return MCP2515_FAIL;
         break;
     }
 
@@ -491,14 +486,12 @@ INT8U MCP_CAN::mcp2515_configRate(const INT8U canSpeed, const INT8U canClock)
         cfg3 &= (~SOF_ENABLE);
     }
 
-    if (set) {
-        mcp2515_setRegister(MCP_CNF1, cfg1);
-        mcp2515_setRegister(MCP_CNF2, cfg2);
-        mcp2515_setRegister(MCP_CNF3, cfg3);
-        return MCP2515_OK;
-    }
-     
-    return MCP2515_FAIL;
+
+    mcp2515_setRegister(MCP_CNF1, cfg1);
+    mcp2515_setRegister(MCP_CNF2, cfg2);
+    mcp2515_setRegister(MCP_CNF3, cfg3);
+    return MCP2515_OK;
+
 }
 
 /*********************************************************************************************************
