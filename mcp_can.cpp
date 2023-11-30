@@ -1281,7 +1281,7 @@ INT8U MCP_CAN::getError(void)
 *********************************************************************************************************/
 void MCP_CAN::clearErrorRX0OVR(void)
 {
-    return mcp2515_modifyRegister(MCP_EFLG, 0b01000000, 0);
+    return mcp2515_modifyRegister(MCP_EFLG, MCP_EFLG_RX0OVR, 0);
 }
 
 /*********************************************************************************************************
@@ -1290,7 +1290,7 @@ void MCP_CAN::clearErrorRX0OVR(void)
 *********************************************************************************************************/
 void MCP_CAN::clearErrorRX1OVR(void)
 {
-    return mcp2515_modifyRegister(MCP_EFLG, 0b10000000, 0);
+    return mcp2515_modifyRegister(MCP_EFLG, MCP_EFLG_RX1OVR, 0);
 }
 
 /*********************************************************************************************************
